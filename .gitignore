@@ -1,0 +1,26 @@
+# General
+
+logs
+*.Logs
+
+# JavaScript
+
+## Dependencies
+node_modules/
+
+## Log files
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Python
+
+## Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+## Environments
+env/
+venv/
+

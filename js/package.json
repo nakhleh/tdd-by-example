@@ -1,0 +1,18 @@
+{
+    "name": "tdd-js",
+    "version": "1.0.0",
+    "description": "TDD By Example JavaScript program",
+    "private": true,
+    "scripts": {
+        "app": "node src/main.js",
+        "lint": "eslint .",
+        "test": "jest"
+    },
+    "author": "Nadim Nakhleh",
+    "license": "MIT",
+    "devDependencies": {
+        "eslint": "^7.27.0",
+        "eslint-config-google": "^0.14.0",
+        "jest": "^26.6.3"
+    }
+}
