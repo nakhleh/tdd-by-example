@@ -3,6 +3,12 @@
 logs
 *.Logs
 
+# Editors
+.vscode/
+.settings/
+.project
+.classpath
+
 # JavaScript
 
 ## Dependencies
@@ -12,6 +18,18 @@ node_modules/
 npm-debug.log
 yarn-debug.log
 yarn-error.log
+
+# Java
+
+## Gradle
+.gradle/
+.gradletasknamecache
+
+## Outputs
+build/
+
+## Store the gradle-wrapper JAR file
+!gradle-wrapper.jar
 
 # Python
 
