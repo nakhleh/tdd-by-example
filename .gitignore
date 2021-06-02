@@ -44,4 +44,11 @@ venv/
 
 # Go
 
-!*.exe
+go/**/*.exe
+go/**/*.exe~
+go/**/*.dll
+go/**/*.so
+go/**/*.dylib
+go/**/*.test
+
+*.out
