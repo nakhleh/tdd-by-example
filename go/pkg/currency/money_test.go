@@ -2,6 +2,7 @@ package currency
 
 import (
 	"testing"
+	"reflect"
 )
 
 func TestDollarMultiply(t *testing.T) {
@@ -38,6 +39,14 @@ func TestEquality(t *testing.T) {
 	if *NewFranc(5) == *NewFranc(6) {
 		t.Fatalf("5 francs should not equal 6 francs")
 	}
+	if *NewFranc(5) == *NewDollar(5) {
+		t.Fatalf("5 dollars should not equal 5 francs")
+	}
+	// Note that == already checks type as well as value, so nothing to do here
+	// reflect.DeepEqual() would show them being equal however... but that's for later
+//	if reflect.DeepEqual(*NewFranc(5), *NewDollar(5)) {
+//		t.Fatalf("5 dollars should not equal 5 francs")
+//	}
 }
 
 
