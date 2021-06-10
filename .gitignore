@@ -4,7 +4,8 @@ logs
 *.Logs
 
 # Editors
-.vscode/
+.vscode/**
+!.vscode/extensions.json
 .settings/
 .project
 .classpath
