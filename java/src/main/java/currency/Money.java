@@ -1,6 +1,6 @@
 package currency;
 
-public class Money {
+public class Money implements Expression {
     protected int amount;
     protected String currency;
     
@@ -14,6 +14,10 @@ public class Money {
     Money(int amount, String currency) {
         this.currency = currency;
         this.amount = amount;
+    }
+
+    Money plus(Money adder) {
+        return new Money(this.amount + adder.amount, this.currency);
     }
 
     Money times(int multiplier) {
