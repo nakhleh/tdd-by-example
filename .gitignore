@@ -27,6 +27,7 @@ yarn-error.log
 .gradletasknamecache
 
 ## Outputs
+bin/
 build/
 
 ## Store the gradle-wrapper JAR file
