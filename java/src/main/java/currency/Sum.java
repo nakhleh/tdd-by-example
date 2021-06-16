@@ -9,7 +9,7 @@ class Sum implements Expression {
         this.cdr = second;
     }
 
-    public Money reduce(String currency) {
+    public Money reduce(Bank bank, String currency) {
         return new Money(this.car.amount + this.cdr.amount, currency);
     }
 }
