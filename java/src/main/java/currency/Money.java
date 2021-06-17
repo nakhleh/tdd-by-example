@@ -21,6 +21,7 @@ public class Money implements Expression {
         return new Sum(this, other);
     }
 
+    @Override
     public Expression times(int multiplier) {
         return new Money(this.amount * multiplier, this.currency);
     }

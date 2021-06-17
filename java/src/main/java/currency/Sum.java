@@ -11,12 +11,17 @@ class Sum implements Expression {
 
     @Override
     public Expression plus(Expression adder) {
-        // TODO - implement
-        return null;
+        return new Sum(this, adder);
     }
 
-    public Money reduce(Bank bank, String currency) {
-        int amount = this.car.reduce(bank, currency).amount + this.cdr.reduce(bank, currency).amount;
-        return new Money(amount, currency);
+    @Override
+    public Expression times(int multiplier) {
+        return new Sum(this.car.times(multiplier), this.cdr.times(multiplier));
     }
+
+    public Money reduce(Bank bank, String currencyTo) {
+        int amount = this.car.reduce(bank, currencyTo).amount + this.cdr.reduce(bank, currencyTo).amount;
+        return new Money(amount, currencyTo);
+    }
+
 }

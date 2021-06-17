@@ -4,10 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 
 public class MoneyTests {
+    static Bank bank;
+
+    @BeforeAll
+    static void setUp() {
+        bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+    }
 
     @Test
     public void testCurrency() {
@@ -19,20 +27,23 @@ public class MoneyTests {
     public void testSimpleAddition() {
         Money five = Money.dollar(5);
         Expression sum = five.plus(five);
-        Bank bank = new Bank();
         Money reduced = bank.reduce(sum, "USD");
         assertEquals(Money.dollar(10), reduced);
     }
 
     @Test
     public void testMixedAddition() {
-        Bank bank = new Bank();
-        Expression fourUsd = Money.dollar(4);
-        Expression twelveChf = Money.franc(12);
-        bank.addRate("CHF", "USD", 2);
-        Expression sum = fourUsd.plus(twelveChf);
+        Expression sum = Money.dollar(4).plus(Money.franc(12));
         Money result = bank.reduce(sum, "USD");
         assertEquals(Money.dollar(10), result);        
+    }
+
+    @Test
+    public void testSumPlusMoney() {
+        Expression sum = Money.dollar(1).plus(Money.dollar(10));
+        sum = sum.plus(Money.franc(200));
+        Money result = bank.reduce(sum, "USD");
+        assertEquals(Money.dollar(111), result);
     }
 
     @Test
@@ -47,30 +58,32 @@ public class MoneyTests {
     @Test
     public void testReduceSum() {
         Expression sum = new Sum(Money.dollar(2), Money.dollar(3));
-        Bank bank = new Bank();
         Money result = bank.reduce(sum, "USD");
         assertEquals(Money.dollar(5), result);
     }
 
     @Test
+    public void testSumTimes() {
+        Expression expr = new Sum(Money.dollar(2), Money.franc(6)).times(2);
+        Money result = bank.reduce(expr, "USD");
+        assertEquals(Money.dollar(10), result);
+    }
+
+    @Test
     public void testReduceMoney() {
         Expression sum = Money.dollar(10);
-        Bank bank = new Bank();
         Money result = bank.reduce(sum, "USD");
         assertEquals(Money.dollar(10), result);
     }
     
     @Test
     public void testReduceMoneyToDifferentCurrency() {
-        Bank bank = new Bank();
-        bank.addRate("CHF", "USD", 2);
         Money dollars = bank.reduce(Money.franc(20), "USD");
         assertEquals(Money.dollar(10), dollars);
     }
 
     @Test
     public void testIdentityRate() {
-        Bank bank = new Bank();
         assertEquals(1, bank.getRate("USD", "USD"));
     }
 
