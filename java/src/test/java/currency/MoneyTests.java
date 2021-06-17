@@ -25,6 +25,17 @@ public class MoneyTests {
     }
 
     @Test
+    public void testMixedAddition() {
+        Bank bank = new Bank();
+        Expression fourUsd = Money.dollar(4);
+        Expression twelveChf = Money.franc(12);
+        bank.addRate("CHF", "USD", 2);
+        Expression sum = fourUsd.plus(twelveChf);
+        Money result = bank.reduce(sum, "USD");
+        assertEquals(Money.dollar(10), result);        
+    }
+
+    @Test
     public void testPlusReturnsSum() {
         Money five = Money.dollar(5);
         Expression result = five.plus(five);

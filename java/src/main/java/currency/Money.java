@@ -16,11 +16,12 @@ public class Money implements Expression {
         this.amount = amount;
     }
 
-    Sum plus(Money other) {
+    @Override
+    public Expression plus(Expression other) {
         return new Sum(this, other);
     }
 
-    Money times(int multiplier) {
+    public Expression times(int multiplier) {
         return new Money(this.amount * multiplier, this.currency);
     }
 
